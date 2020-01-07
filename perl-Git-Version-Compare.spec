@@ -4,7 +4,7 @@
 #
 Name     : perl-Git-Version-Compare
 Version  : 1.004
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libg/libgit-version-compare-perl/libgit-version-compare-perl_1.004-1.debian.tar.xz
@@ -12,6 +12,7 @@ Summary  : 'Functions to compare Git versions'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Git-Version-Compare-license = %{version}-%{release}
+Requires: perl-Git-Version-Compare-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Test::NoWarnings)
 
@@ -25,6 +26,7 @@ use Git::Version::Compare qw( cmp_git );
 Summary: dev components for the perl-Git-Version-Compare package.
 Group: Development
 Provides: perl-Git-Version-Compare-devel = %{version}-%{release}
+Requires: perl-Git-Version-Compare = %{version}-%{release}
 
 %description dev
 dev components for the perl-Git-Version-Compare package.
@@ -38,18 +40,28 @@ Group: Default
 license components for the perl-Git-Version-Compare package.
 
 
+%package perl
+Summary: perl components for the perl-Git-Version-Compare package.
+Group: Default
+Requires: perl-Git-Version-Compare = %{version}-%{release}
+
+%description perl
+perl components for the perl-Git-Version-Compare package.
+
+
 %prep
 %setup -q -n Git-Version-Compare-1.004
-cd ..
-%setup -q -T -D -n Git-Version-Compare-1.004 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libgit-version-compare-perl_1.004-1.debian.tar.xz
+cd %{_builddir}/Git-Version-Compare-1.004
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Git-Version-Compare-1.004/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Git-Version-Compare-1.004/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -59,7 +71,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -68,8 +80,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare/deblicense_copyright
+cp %{_builddir}/Git-Version-Compare-1.004/LICENSE %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare/ea436f0324de15ab475a4b13c31b892fe85fe2c9
+cp %{_builddir}/Git-Version-Compare-1.004/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare/3d9b88fe8680fe3a0c6ab15e5770128d7881393e
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -82,7 +94,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Git/Version/Compare.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -90,5 +101,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Git-Version-Compare/LICENSE
-/usr/share/package-licenses/perl-Git-Version-Compare/deblicense_copyright
+/usr/share/package-licenses/perl-Git-Version-Compare/3d9b88fe8680fe3a0c6ab15e5770128d7881393e
+/usr/share/package-licenses/perl-Git-Version-Compare/ea436f0324de15ab475a4b13c31b892fe85fe2c9
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Git/Version/Compare.pm
