@@ -4,7 +4,7 @@
 #
 Name     : perl-Git-Version-Compare
 Version  : 1.004
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libg/libgit-version-compare-perl/libgit-version-compare-perl_1.004-1.debian.tar.xz
@@ -81,7 +81,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare
 cp %{_builddir}/Git-Version-Compare-1.004/LICENSE %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare/ea436f0324de15ab475a4b13c31b892fe85fe2c9
-cp %{_builddir}/Git-Version-Compare-1.004/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare/3d9b88fe8680fe3a0c6ab15e5770128d7881393e
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Git-Version-Compare/3d9b88fe8680fe3a0c6ab15e5770128d7881393e
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -106,4 +106,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Git/Version/Compare.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Git/Version/Compare.pm
