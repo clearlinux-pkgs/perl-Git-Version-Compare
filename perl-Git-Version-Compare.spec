@@ -4,7 +4,7 @@
 #
 Name     : perl-Git-Version-Compare
 Version  : 1.004
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libg/libgit-version-compare-perl/libgit-version-compare-perl_1.004-1.debian.tar.xz
@@ -106,4 +106,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/Git/Version/Compare.pm
+/usr/lib/perl5/vendor_perl/5.30.3/Git/Version/Compare.pm
