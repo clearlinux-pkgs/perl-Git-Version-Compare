@@ -7,7 +7,7 @@
 #
 Name     : perl-Git-Version-Compare
 Version  : 1.005
-Release  : 29
+Release  : 30
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.005.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOOK/Git-Version-Compare-1.005.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libg/libgit-version-compare-perl/libgit-version-compare-perl_1.004-1.debian.tar.xz
